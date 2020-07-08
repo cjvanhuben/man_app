@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output,State
 import dash_table
 import plotly.graph_objs as go
 
-from dashboard import app 
+from dashboard import app
 from dashboard import df
 import sidepanel
 import Tab1
@@ -17,7 +17,7 @@ import Tab2
 #set the app.layout
 app.layout = sidepanel.layout
 
-
+server = app.server
 
 
 @app.callback(Output('tabs-content', 'children'),
