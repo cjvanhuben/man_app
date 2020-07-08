@@ -19,11 +19,8 @@ layout = html.Div([
     ,dbc.Row([dbc.Col(
         html.Div([html.H3('Neighborhood'),dcc.Dropdown(
             options = [{'label': i, 'value':i} for i in df.Neighborhood.unique()],
-            multi=True
-
-
-
-
+            multi=True,
+            value = [i for i in df.Neighborhood.unique()]
         ),
          html.Div([html.P('\n'),html.H3('Price Slider')
             ,dcc.RangeSlider(id='price-slider'
