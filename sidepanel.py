@@ -22,7 +22,7 @@ layout = html.Div([
             multi=True,
             value = [i for i in df.Neighborhood.unique()]
         ),
-         html.Div([html.P('\n'),html.H3('Price Slider')
+         html.Div([html.P('\n'),html.H3('Price')
             ,dcc.RangeSlider(id='price-slider'
                             ,min = min_p
                             ,max= max_p
