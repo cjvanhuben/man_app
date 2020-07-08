@@ -40,7 +40,7 @@ layout = html.Div([
 ,dbc.Col(html.Div([
             dcc.Tabs(id="tabs", value='tab-1', children=[
                     dcc.Tab(label='Data Table', value='tab-1'),
-                    dcc.Tab(label='Price by Bathroom', value='tab-2'),
+                    dcc.Tab(label='Graphs', value='tab-2'),
                 ])
             , html.Div(id='tabs-content')
         ]), width=9)])
