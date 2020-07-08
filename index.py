@@ -7,7 +7,8 @@ from dash.dependencies import Input, Output,State
 import dash_table
 import plotly.graph_objs as go
 
-from dashboard import app,df
+from dashboard import app 
+from dashboard import df
 import sidepanel
 import Tab1
 import Tab2
