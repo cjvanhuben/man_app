@@ -7,12 +7,19 @@ from dash.dependencies import Input, Output,State
 import dash_table
 import plotly.graph_objs as go
 
-from dashboard import app,df
+
 import sidepanel
 import Tab1
 import Tab2
 
 
+
+df = pd.read_csv("Manhattan_Real_Estate.csv",usecols=['Price','Beds','Baths','Sq Feet','Neighborhood'])
+
+app = dash.Dash(__name__, external_stylesheets = [dbc.themes.BOOTSTRAP])
+app.css.append_css({'external_url':'/static/css.css'})
+server = app.server
+app.config.suppress_callback_exceptions = True
 #set the app.layout
 app.layout = sidepanel.layout
 
