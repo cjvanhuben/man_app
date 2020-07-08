@@ -38,9 +38,19 @@ def update_graph(prices):
                                 }
                         , name='Price v Baths'
                     )
+    trace2 = go.Scattergl(x = dff['Beds']
+                        , y = dff['Price']
+                        , mode='markers'
+                        , opacity=0.7
+                        , marker={
+                                'size': 8
+                                , 'line': {'width': 0.5, 'color': 'white'}
+                                }
+                        , name='Price v Baths'
+                    )
     return html.Div([html.H4('Price by Bathroom'),
         dcc.Graph(
-            id='bed-price'
+            id='bath-price'
             , figure={
                 'data': [trace1],
                 'layout': dict(
@@ -52,4 +62,22 @@ def update_graph(prices):
                 )
             }
         )
+    , html.P('\n'),html.H4('Price by Bedroom'),
+    dcc.Graph(
+        id='bed-price'
+        , figure={
+            'data': [trace2],
+            'layout': dict(
+                xaxis={'title': 'Beds'},
+                yaxis={'title': 'Price'},
+                margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
+                legend={'x': 0, 'y': 1},
+                hovermode='closest'
+            )
+        }
+
+    )
+
+
+
     ],style={'margin':'15px'})
