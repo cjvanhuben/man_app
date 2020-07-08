@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 import dash_table
 import pandas as pd
 from dash.dependencies import Input, Output
-from index import app,df
+from dashboard import app,df
 
 
 PAGE_SIZE = 50

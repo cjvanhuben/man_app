@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 import dash_table
-from index import app,df
+from dashboard import app,df
 
 
 layout = html.Div(

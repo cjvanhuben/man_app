@@ -7,7 +7,7 @@ import dash_table
 import pandas
 from dash.dependencies import Input,Output
 
-from index import app,df
+from dashboard import app,df
 
 
 min_p = df.Price.min()
