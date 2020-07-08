@@ -86,16 +86,19 @@ def split_filter_part(filter_part):
      Input('table-sorting-filtering', 'sort_by'),
 
      Input('table-sorting-filtering', 'filter_query'),
+     Input('dropdown','value'),
       Input('price-slider', 'value')])
 
-def update_table(page_current, page_size, sort_by, filter,prices):
+def update_table(page_current, page_size, sort_by, filter,drop,prices):
     filtering_expressions = filter.split(' && ')
     dff = df
 
     low = prices[0]
     high = prices[1]
+    hood = drop
+    
     dff = dff.loc[(dff['Price'] >= low) & (dff['Price'] <= high)]
-
+    dff = dff.loc[dff['Neighborhood'].isin(hood)]
 
 
     for filter_part in filtering_expressions:

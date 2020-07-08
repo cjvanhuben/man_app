@@ -17,7 +17,7 @@ layout = html.Div([
 
     html.H1('Manhattan Apartments in June')
     ,dbc.Row([dbc.Col(
-        html.Div([html.H3('Neighborhood'),dcc.Dropdown(
+        html.Div([html.H3('Neighborhood'),dcc.Dropdown(id = 'dropdown',
             options = [{'label': i, 'value':i} for i in df.Neighborhood.unique()],
             multi=True,
             value = [i for i in df.Neighborhood.unique()]
