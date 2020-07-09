@@ -50,7 +50,7 @@ def update_graph(prices,drop):
                                 }
                         , name='Price v Baths'
                     )
-    return html.Div([html.H4('Price by Bathroom'),
+    return html.Div([
         dcc.Graph(
             id='bath-price'
             , figure={
@@ -58,13 +58,14 @@ def update_graph(prices,drop):
                 'layout': dict(
                     xaxis={'type': 'log', 'title': 'Baths'},
                     yaxis={'title': 'Price'},
-                    margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
+                    margin={'l': 40, 'b': 40, 't': 40, 'r': 10},
+                    title='Price by Bathroom',
                     legend={'x': 0, 'y': 1},
                     hovermode='closest'
                 )
             }
         )
-    , html.P('\n'),html.H4('Price by Bedroom'),
+    , html.P('\n'),
     dcc.Graph(
         id='bed-price'
         , figure={
@@ -72,7 +73,8 @@ def update_graph(prices,drop):
             'layout': dict(
                 xaxis={'title': 'Beds'},
                 yaxis={'title': 'Price'},
-                margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
+                title='Price by Bedroom',
+                margin={'l': 40, 'b': 40, 't': 40, 'r': 10},
                 legend={'x': 0, 'y': 1},
                 hovermode='closest'
             )
