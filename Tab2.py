@@ -38,7 +38,9 @@ def update_graph(prices,drop):
                         , marker={
                                 'size': 8
                                 , 'line': {'width': 0.5, 'color': 'white'}
+
                                 }
+                        , text= dff['Address']    
                         , name='Price v Baths'
                     )
     trace2 = go.Scattergl(x = dff['Beds']
