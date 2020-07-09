@@ -15,29 +15,34 @@ max_p = df.Price.max()
 
 layout = html.Div([
 
-    html.H1('Manhattan Apartments in June')
+    html.H1('Current NYC Apartment Rental Listings')
     ,dbc.Row([dbc.Col(
-        html.Div([html.H3('Neighborhood'),dcc.Dropdown(id = 'dropdown',
+        html.Div([
+
+html.Div([html.P('\n'),html.H3('Price')
+   ,dcc.RangeSlider(id='price-slider'
+                   ,min = min_p
+                   ,max= max_p
+                   , marks = {0: '$0',
+
+                               10000: '$10,000',
+                               20000: '$20,000',
+                               30000: '$30,000',
+                               40000: '$40,000'
+
+                              }
+                   , value = [0,50000]
+                   )
+
+                   ]),
+
+
+        html.H3('Neighborhood'),dcc.Dropdown(id = 'dropdown',
             options = [{'label': i, 'value':i} for i in df.Neighborhood.unique()],
             multi=True,
             value = [i for i in df.Neighborhood.unique()]
-        ),
-         html.Div([html.P('\n'),html.H3('Price')
-            ,dcc.RangeSlider(id='price-slider'
-                            ,min = min_p
-                            ,max= max_p
-                            , marks = {0: '$0',
-                                        1000000: '$1,000,000',
-                                        2500000: '$2,500,000',
-                                        4000000: '$4,000,000',
-                                        5500000: '$5,500,000',
-                                        7000000: '$7,000,000',
-                                        8500000: '$8,500,000'
-                                       }
-                            , value = [0,10000000]
-                            )
+        )
 
-                            ])
 
         ], style={'marginBottom': 50, 'marginTop': 25, 'marginLeft':15, 'marginRight':15})
     , width=3,id ='side')
