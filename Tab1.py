@@ -11,6 +11,8 @@ from dashboard import app,df
 
 PAGE_SIZE = 50
 
+df["Beds"] = df["Beds"].fillna(0)
+
 layout = html.Div([html.H4('June Manhattan Apartment Data'),dash_table.DataTable(
                             css= [{'selector': '.row', 'rule': 'margin: 2px'}],
                             id='table-sorting-filtering',

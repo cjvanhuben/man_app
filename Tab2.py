@@ -21,6 +21,7 @@ Input('dropdown','value')
 
 def update_graph(prices,drop):
     dff = df
+    dff["Beds"] = dff["Beds"].fillna(0)
     low = prices[0]
     high = prices[1]
     dff = dff.loc[(dff['Price'] >= low) & (dff['Price'] <= high)]
