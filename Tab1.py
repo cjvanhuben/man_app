@@ -9,7 +9,7 @@ from dash.dependencies import Input, Output
 from dashboard import app,df
 
 
-PAGE_SIZE = 50
+PAGE_SIZE = 100
 
 df["Beds"] = df["Beds"].fillna(0)
 
@@ -19,23 +19,21 @@ layout = html.Div([html.H4('Current NYC Apartment Rental Listing'),dash_table.Da
                             columns=[
                                 {'name': i, 'id': i,'deletable':True} for i in df.columns
                             ],
-                            data=df.to_dict('records'),
                             style_table={'height':'750px','overflowX': 'scroll'},
                             style_cell={
-                                'height': '90',
+                                'whiteSpace':'normal',
+                                'height': 'auto',
                                 # all three widths are needed
-                                'minWidth': '20px', 'width': '20px', 'maxWidth': '20px',
-                                'whiteSpace': 'normal'
+                                # 'minWidth': '100px', 'width': '100px', 'maxWidth': '100px',
+
                             },
+
                             style_data_conditional=[
                             {
                             'if':{'row_index':'odd'},'backgroundColor':'rgb(248,248,248)'
                             }
                             ],
-                            style_cell_conditional=[
-                            {'if':{'coloumn_id':'description'},'width':'48%'},
-                            {'if':{'coloumn_id':'title'},'width':'18%'}
-                            ],
+
                             page_current= 0,
                             page_size= PAGE_SIZE,
                             page_action='custom',

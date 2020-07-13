@@ -4,7 +4,7 @@ import pandas as pd
 
 
 df = pd.read_csv("NYC_Apts_Rental_Listing.csv",usecols=['Price','Beds','Baths','Neighborhood','Address','Borough','Area'])
-df=df.head(1000)
+# df=df.head(5000)
 app = dash.Dash(__name__, external_stylesheets = [dbc.themes.BOOTSTRAP])
 app.css.append_css({'external_url':'/static/css.css'})
 

@@ -1,34 +1,31 @@
-import pandas as pd
 import dash
-import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
-from dash.dependencies import Input, Output,State
+from dash.dependencies import Input, Output
 import dash_table
-import plotly.graph_objs as go
-
-from dashboard import app
-from dashboard import df
-import sidepanel
-import Tab1
-import Tab2
+import pandas as pd
 
 
-#set the app.layout
-app.layout = sidepanel.layout
+app = dash.Dash(__name__)
 
-server = app.server
+df = pd.read_csv("NYC_Apts_Rental_Listing.csv")
 
+PAGE_SIZE = 100
 
-@app.callback(Output('tabs-content', 'children'),
-              [Input('tabs', 'value')])
-def render_content(tab):
-    if tab == 'tab-1':
-        # return None
-        return Tab1.layout
-    elif tab == 'tab-2':
-        return Tab2.layout
+app.layout = dash_table.DataTable(
+    id='table-sorting-filtering',
+    columns=[
+        {'name': i, 'id': i, 'deletable': True} for i in sorted(df.columns)
+    ],
+    page_current= 0,
+    page_size= PAGE_SIZE,
+    page_action='custom',
 
+    filter_action='custom',
+    filter_query='',
+
+    sort_action='custom',
+    sort_mode='multi',
+    sort_by=[]
+)
 
 
 operators = [['ge ', '>='],
@@ -39,6 +36,7 @@ operators = [['ge ', '>='],
              ['eq ', '='],
              ['contains '],
              ['datestartswith ']]
+
 
 def split_filter_part(filter_part):
     for operator_type in operators:
@@ -63,32 +61,16 @@ def split_filter_part(filter_part):
 
     return [None] * 3
 
+
 @app.callback(
     Output('table-sorting-filtering', 'data'),
     [Input('table-sorting-filtering', "page_current"),
      Input('table-sorting-filtering', "page_size"),
      Input('table-sorting-filtering', 'sort_by'),
-
-     Input('table-sorting-filtering', 'filter_query'),
-     Input('dropdown','value'),
-      Input('price-slider', 'value')])
-
-def update_table(page_current, page_size, sort_by, filter,drop,prices):
+     Input('table-sorting-filtering', 'filter_query')])
+def update_table(page_current, page_size, sort_by, filter):
     filtering_expressions = filter.split(' && ')
     dff = df
-
-    low = prices[0]
-    high = prices[1]
-
-
-    dff = dff.loc[(dff['Price'] >= low) & (dff['Price'] <= high)]
-
-    if drop == None or drop == []:
-        pass
-    else:
-        dff = dff.loc[dff['Neighborhood'].isin(drop)]
-
-
     for filter_part in filtering_expressions:
         col_name, operator, filter_value = split_filter_part(filter_part)
 
@@ -96,7 +78,7 @@ def update_table(page_current, page_size, sort_by, filter,drop,prices):
             # these operators match pandas series operator method names
             dff = dff.loc[getattr(dff[col_name], operator)(filter_value)]
         elif operator == 'contains':
-            dff = dff.loc[dff[col_name].str.contains(filter_value,na=False)]
+            dff = dff.loc[dff[col_name].str.contains(filter_value)]
         elif operator == 'datestartswith':
             # this is a simplification of the front-end filtering logic,
             # only works with complete fields in standard format
@@ -117,5 +99,5 @@ def update_table(page_current, page_size, sort_by, filter,drop,prices):
     return dff.iloc[page * size: (page + 1) * size].to_dict('records')
 
 
-if __name__ == "__main__":
-    app.run_server(debug = False)
+if __name__ == '__main__':
+    app.run_server(debug=True)
