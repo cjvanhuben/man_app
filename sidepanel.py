@@ -37,12 +37,16 @@ html.Div([html.P('\n'),html.H3('Price')
                    ]),
 
 
-        html.H3('Neighborhood'),dcc.Dropdown(id = 'dropdown',
+        html.H3('Neighborhood'),dcc.Dropdown(id = 'dropdown1',
             options = [{'label': i, 'value':i} for i in df.Neighborhood.unique()],
             multi=True,
             # value = [i for i in df.Neighborhood.unique()]
+        ),
+        html.H3('Borough'),dcc.Dropdown(id = 'dropdown2',
+            options = [{'label': i, 'value':i} for i in df.Borough.unique()],
+            multi=True,
+            # value = [i for i in df.Neighborhood.unique()]
         )
-
 
         ], style={'marginBottom': 50, 'marginTop': 25, 'marginLeft':15, 'marginRight':15})
     , width=3,id ='side')

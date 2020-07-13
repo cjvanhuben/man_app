@@ -16,10 +16,11 @@ layout = html.Div(
 
 @app.callback(Output('table-paging-with-graph-container', "children"),
 [Input('price-slider', 'value'),
-Input('dropdown','value')
+Input('dropdown1','value'),
+Input('dropdown2','value')
 ])
 
-def update_graph(prices,drop):
+def update_graph(prices,drop1,drop2):
     dff = df
     dff["Beds"] = dff["Beds"].fillna(0)
     low = prices[0]
@@ -27,10 +28,14 @@ def update_graph(prices,drop):
     dff = dff.loc[(dff['Price'] >= low) & (dff['Price'] <= high)]
 
 
-    if drop == None or drop == []:
+    if drop1 == None or drop1 == []:
         pass
     else:
-        dff = dff.loc[dff['Neighborhood'].isin(drop)]
+        dff = dff.loc[dff['Neighborhood'].isin(drop1)]
+    if drop2 == None or drop2 == []:
+        pass
+    else:
+        dff = dff.loc[dff['Borough'].isin(drop2)]
 
     # if ratingcheck == ['Y']:
     #    dff = dff.loc[dff['rating'] >= 95]
