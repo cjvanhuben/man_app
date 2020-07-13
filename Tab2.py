@@ -25,7 +25,12 @@ def update_graph(prices,drop):
     low = prices[0]
     high = prices[1]
     dff = dff.loc[(dff['Price'] >= low) & (dff['Price'] <= high)]
-    dff = dff.loc[dff['Neighborhood'].isin(drop)]
+
+
+    if drop == None or drop == []:
+        pass
+    else:
+        dff = dff.loc[dff['Neighborhood'].isin(drop)]
 
     # if ratingcheck == ['Y']:
     #    dff = dff.loc[dff['rating'] >= 95]
@@ -40,7 +45,7 @@ def update_graph(prices,drop):
                                 , 'line': {'width': 0.5, 'color': 'white'}
 
                                 }
-                        , text= dff['Address']    
+                        , text= dff['Address']
                         , name='Price v Baths'
                     )
     trace2 = go.Scattergl(x = dff['Beds']

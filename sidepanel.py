@@ -40,7 +40,7 @@ html.Div([html.P('\n'),html.H3('Price')
         html.H3('Neighborhood'),dcc.Dropdown(id = 'dropdown',
             options = [{'label': i, 'value':i} for i in df.Neighborhood.unique()],
             multi=True,
-            value = [i for i in df.Neighborhood.unique()]
+            # value = [i for i in df.Neighborhood.unique()]
         )
 
 

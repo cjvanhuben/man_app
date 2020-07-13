@@ -24,6 +24,7 @@ server = app.server
               [Input('tabs', 'value')])
 def render_content(tab):
     if tab == 'tab-1':
+        # return None
         return Tab1.layout
     elif tab == 'tab-2':
         return Tab2.layout
@@ -95,10 +96,14 @@ def update_table(page_current, page_size, sort_by, filter,drop,prices):
 
     low = prices[0]
     high = prices[1]
-    hood = drop
-    
+
+
     dff = dff.loc[(dff['Price'] >= low) & (dff['Price'] <= high)]
-    dff = dff.loc[dff['Neighborhood'].isin(hood)]
+
+    if drop == None or drop == []:
+        pass
+    else:
+        dff = dff.loc[dff['Neighborhood'].isin(drop)]
 
 
     for filter_part in filtering_expressions:
