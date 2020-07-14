@@ -72,17 +72,27 @@ def split_filter_part(filter_part):
      Input('table-sorting-filtering', 'filter_query'),
      Input('dropdown1','value'),
      Input('dropdown2','value'),
-      Input('price-slider', 'value')])
+     Input('price-slider', 'value'),
+     Input('bed-slider','value'),
+     Input('bath-slider','value')
 
-def update_table(page_current, page_size, sort_by, filter,drop1,drop2,prices):
+      ])
+
+def update_table(page_current, page_size, sort_by, filter,drop1,drop2,prices,bed,bath):
     filtering_expressions = filter.split(' && ')
     dff = df
 
     low = prices[0]
     high = prices[1]
+    blow = bed[0]
+    bhigh=bed[1]
+    bathlow=bath[0]
+    bathhigh=bath[1]
 
 
     dff = dff.loc[(dff['Price'] >= low) & (dff['Price'] <= high)]
+    dff = dff.loc[(dff['Beds'] >= blow) & (dff['Beds'] <= bhigh)]
+    dff = dff.loc[(dff['Baths'] >= bathlow) & (dff['Baths'] <= bathhigh)]
 
     if drop1 == None or drop1 == []:
         pass

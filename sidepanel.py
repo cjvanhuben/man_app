@@ -12,6 +12,10 @@ from dashboard import app,df
 
 min_p = df.Price.min()
 max_p = df.Price.max()
+min_b = df.Beds.min()
+max_b = df.Beds.max()
+min_bath = df.Baths.min()
+max_bath = df.Baths.max()
 
 layout = html.Div([
 
@@ -32,7 +36,33 @@ html.Div([html.P('\n'),html.H3('Price')
 
                               }
                    , value = [0,50000]
-                   )
+                   ),
+                   html.P('\n'),html.H3('Beds'),
+                   dcc.RangeSlider(id='bed-slider'
+                                   ,min = min_b
+                                   ,max= max_b
+                                   , marks = {0: '0',
+                                               1: '1',
+                                               2: '2',
+                                               3: '3',
+                                               4: '4',
+                                               5:'5'
+                                              }
+                                   , value = [0,6]
+                                   ),
+                                   html.P('\n'),html.H3('Baths'),
+                                   dcc.RangeSlider(id='bath-slider'
+                                                   ,min = min_bath
+                                                   ,max= max_bath
+                                                   , marks = {0: '0',
+                                                               1: '1',
+                                                               2: '2',
+                                                               3: '3',
+                                                               4: '4',
+                                                               5:'5'
+                                                              }
+                                                   , value = [0,6]
+                                                   )
 
                    ]),
 
