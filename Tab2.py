@@ -78,13 +78,9 @@ def update_graph(prices,bed,bath,drop1,drop2):
                     )
     trace3 = go.Violin(y=dff['Price'], x = dff['Borough'],
      box_visible = True,line_color = 'blue',meanline_visible=True,fillcolor='lightseagreen',opacity=.5,x0='Rent'
-
-
-
-
-
-
     )
+
+    
     return html.Div([
         dcc.Graph(
             id='bath-price'
@@ -115,7 +111,7 @@ def update_graph(prices,bed,bath,drop1,drop2):
             )
         }
 
-    ),
+    ),html.P('\n'),
     dcc.Graph(
         id='violin'
         , figure={
@@ -132,7 +128,6 @@ def update_graph(prices,bed,bath,drop1,drop2):
         }
 
     )
-
 
 
     ],style={'margin':'15px'})
